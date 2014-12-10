@@ -13,7 +13,7 @@ __author__ = 'Jathan McCollum, Eileen Tschetter, Mark Thomas'
 __maintainer__ = 'Jathan McCollum'
 __email__ = 'jathan@gmail.com'
 __copyright__ = 'Copyright 2009-2013, AOL Inc.; 2014 Salesforce.com'
-__version__ = '2.4'
+__version__ = '2.4.1'
 
 import collections
 import datetime
@@ -679,7 +679,7 @@ class NetACLInfo(Commando):
     def to_cisco(self, dev, commands=None, extra=None):
         """This is the "show me all interface information" command we pass to
         IOS devices"""
-        return ['show configuration | include ^(interface | ip address | ip access-group | description|!)']
+        return ['show configuration | include ^(interface | ip address | ip access-group | description| channel-group | switchport|!)']
 
     def to_arista(self, dev, commands=None, extra=None):
         """
@@ -691,7 +691,7 @@ class NetACLInfo(Commando):
              generate_ios_cmd
 
         """
-        return ['show running-config | include (^interface | ip address | ip acces-group | description |!)']
+        return ['show running-config | include (^interface | ip address | ip acces-group | description | channel-group | switchport|!)']
 
     def to_force10(self, dev, commands=None, extra=None):
         """
@@ -700,7 +700,7 @@ class NetACLInfo(Commando):
               run".
             + The regex must be quoted.
         """
-        return ['show running-config | grep "^(interface | ip address | ip access-group | description|!)"']
+        return ['show running-config | grep "^(interface | ip address | ip access-group | description| channel-group | switchport|!)"']
 
     # Other IOS-like vendors are Cisco-enough
     to_brocade = to_cisco
